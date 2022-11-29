@@ -1,1 +1,0 @@
-# ITGuru_TechTask

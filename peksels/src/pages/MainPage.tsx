@@ -1,11 +1,7 @@
 import ListOfPhotos from "../components/ListOfPhotos";
 
 function MainPage() {
-  return (
-    <div>
-      <ListOfPhotos />
-    </div>
-  );
+  return <ListOfPhotos />;
 }
 
 export default MainPage;

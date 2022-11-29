@@ -1,15 +1,11 @@
 import { createClient } from "pexels";
-import { PEXELS_API_KEY } from "../../types/photos";
 
 export const fetchPhotos = () => {
-  const client = createClient(PEXELS_API_KEY);
+  const client = createClient(`${process.env.REACT_APP_PEXELS_API_KEY}`);
 
-  async function fetch() {
+  return async (per_page = { per_page: 15 }) => {
     try {
-      await client.photos
-        .curated({ per_page: 15 })
-        .then((photos) => console.log(photos));
+      await client.photos.curated(per_page).then();
     } catch (e) {}
-  }
-  fetch();
+  };
 };
