@@ -1,0 +1,35 @@
+.card-wrapper {
+  margin-bottom: 15px;
+  width: 100%;
+  -webkit-transition: all 350ms ease;
+  transition: all 350ms ease;
+  position: relative;
+
+  .photo-img {
+    inset: 0;
+    width: 100%;
+  }
+
+  .group-of-buttons {
+    display: none;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    pointer-events: none;
+    z-index: 2;
+
+    .dowload-button {
+      position: absolute;
+      right: 15px;
+      bottom: 15px;
+    }
+
+    .like-button {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+    }
+  }
+}
