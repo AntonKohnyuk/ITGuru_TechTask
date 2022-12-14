@@ -6,7 +6,6 @@ export interface PhotosState {
   photos: Photo[];
   loading: boolean;
   error: null | string;
-  page: number
 }
 
 interface FetchPhotosAction {
@@ -16,9 +15,9 @@ interface FetchPhotosAction {
 interface FetchPhotosSuccessAction {
   type: PhotosActionsTypes.FETCH_PHOTOS_SUCCESS;
   payload: {
-    photos: Photo[], 
-    next_page: number
-  }
+    photos: Photo[];
+    next_page: number;
+  };
 }
 
 interface FetchPhotosErrorAction {
@@ -31,9 +30,9 @@ export type PhotosAction =
   | FetchPhotosErrorAction
   | FetchPhotosSuccessAction;
 
-  export interface SetFetchSettingsAction{
-    type: SetSettingsActionsTypes.SET_SETTINGS,
-    payload: PaginationParams
-  }
+export interface SetFetchSettingsAction {
+  type: SetSettingsActionsTypes.SET_SETTINGS;
+  payload: PaginationParams;
+}
 
-
+export type PagParams = PaginationParams & { query: string };

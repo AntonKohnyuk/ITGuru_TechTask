@@ -14,7 +14,7 @@ function ListOfPhotos() {
       let windowRelativeBottom =
         document.documentElement.getBoundingClientRect().bottom;
       if (
-        windowRelativeBottom > document.documentElement.clientHeight + 300 ||
+        windowRelativeBottom > document.documentElement.clientHeight + 3000 ||
         loading
       )
         break;

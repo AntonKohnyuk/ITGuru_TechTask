@@ -1,11 +1,11 @@
 import { PaginationParams } from "pexels";
 import { SetSettingsActionsTypes } from "../../entities/enums/settings";
-import { SetFetchSettingsAction } from "../../entities/types/photos";
+import { PagParams, SetFetchSettingsAction } from "../../entities/types/photos";
 
-const initialState: PaginationParams = {
-  per_page: 30,
+const initialState: PagParams = {
+  per_page: 15,
   page: 1,
-  query: undefined,
+  query: "",
 };
 
 const fetchSettingsReducer = (

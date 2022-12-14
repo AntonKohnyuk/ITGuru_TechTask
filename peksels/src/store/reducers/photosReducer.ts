@@ -5,7 +5,6 @@ const initialState: PhotosState = {
   photos: [],
   loading: false,
   error: null,
-  page: 1,
 };
 
 export const photosReducer = (
@@ -26,7 +25,6 @@ export const photosReducer = (
         loading: false,
         error: null,
         photos: [...state.photos, ...action.payload.photos],
-        page: action.payload.next_page,
       };
     case PhotosActionsTypes.FETCH_PHOTOS_ERROR:
       return { ...state, loading: false, error: action.payload, photos: [] };
