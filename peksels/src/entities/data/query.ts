@@ -1,0 +1,51 @@
+const query: string[] = [
+  "Wolf",
+  "Fox",
+  "Tigers",
+  "Birds",
+  "Nature",
+  "Sea",
+  "Mountains",
+  "Night City",
+  "New York",
+  "Barcelona",
+  "Paris",
+  "Skyscraper",
+  "Crowd",
+  "Lights",
+  "Fire",
+  "Beauty",
+  "Woman",
+  "Man",
+  "Disco",
+  "Rest",
+  "Happiness",
+  "Forest",
+  "Rings",
+  "HandMade",
+  "Miami",
+  "Sakura",
+  "Japan",
+  "Clocks",
+  "Sky",
+  "Christmas",
+  "New Year",
+  "Halloween",
+  "London",
+  "Las Vegas",
+  "Moscow",
+  "Minsk",
+  "Lakes",
+  "Iceland",
+  "Santa Claus",
+  "old garden",
+  "Art",
+];
+
+export function getCategories() {
+  const categories: string[] = query.splice(
+    Math.floor(Math.random() * (33 - 0)) + 0,
+    7
+  );
+  return categories;
+}
