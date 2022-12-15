@@ -50,7 +50,7 @@ function PhotoCard({ photo }: PhotoProps) {
           title="download"
           className="download-photo"
           target="_blank"
-          rel="noreferrer"
+          rel="noreferrer noopenen"
         >
           <SvgIcon
             component={DownloadIcon}
@@ -61,7 +61,16 @@ function PhotoCard({ photo }: PhotoProps) {
           />
         </a>
       </div>
-      <div></div>
+      <div className="photographer">
+        <a
+          href={photo.photographer_url}
+          target="_blank"
+          rel="noreferrer"
+          className="photographer-name"
+        >
+          Photographer: {photo.photographer}
+        </a>
+      </div>
     </div>
   );
 }

@@ -93,14 +93,15 @@ function Header() {
                 key={index}
                 className="category"
               >
-                {category},&nbsp;
+                {category}
+                {index < 6 ? <span>,&nbsp;</span> : <span>&nbsp;</span>}
               </Link>
             ))}
           </div>
         </div>
         <img
           alt={backImg.alt || "Photo"}
-          src={backImg.src?.landscape || ""}
+          src={backImg.src?.landscape || "/img/loader.png"}
           className="header-background "
         />
         <a
