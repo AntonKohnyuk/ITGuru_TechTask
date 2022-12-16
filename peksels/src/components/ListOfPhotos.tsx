@@ -1,20 +1,28 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useTypedSelector } from "../hooks/useTypedSelector";
 import PhotoCard from "./Photo";
 import "../entities/styles/list-of-photos.scss";
 import { useActions } from "../hooks/useActions";
+import { useParams } from "react-router-dom";
 
-function ListOfPhotos() {
+interface PageProps {
+  pageName: string;
+}
+
+function ListOfPhotos({ pageName }: PageProps) {
   const { photos, error, loading } = useTypedSelector((state) => state.photos);
   const { page, per_page } = useTypedSelector((state) => state.fetchSettings);
-  const { fetchPhotos, setFetchSettings } = useActions();
+  const { fetchPhotos, setFetchSettings, clearStore } = useActions();
+  const { category } = useParams();
+
+  const [query, setQuery] = useState(category || "");
 
   const InfiniteScroll = () => {
     while (true) {
       let windowRelativeBottom =
         document.documentElement.getBoundingClientRect().bottom;
       if (
-        windowRelativeBottom > document.documentElement.clientHeight + 3000 ||
+        windowRelativeBottom > document.documentElement.clientHeight + 1000 ||
         loading
       )
         break;
@@ -24,13 +32,19 @@ function ListOfPhotos() {
 
   useEffect(() => {
     window.addEventListener("scroll", InfiniteScroll);
-    return () => window.removeEventListener("scroll", InfiniteScroll);
+    return () => {
+      window.removeEventListener("scroll", InfiniteScroll);
+    };
   });
 
   useEffect(() => {
-    fetchPhotos({ page, per_page });
+    fetchPhotos({ page, per_page, query }, pageName);
   }, [page]);
-
+  useEffect(() => {
+    return () => {
+      clearStore();
+    };
+  }, []);
   if (error) {
     return <h2>{error}</h2>;
   }

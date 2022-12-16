@@ -1,5 +1,14 @@
+import ListOfPhotos from "../components/ListOfPhotos";
+import Managment from "../components/Managment";
+import { PAGES } from "../entities/enums/pages";
+
 function CategoriesPage() {
-  return <div>Cat</div>;
+  return (
+    <>
+      <Managment />
+      <ListOfPhotos pageName={PAGES.CATEGORIES} />
+    </>
+  );
 }
 
 export default CategoriesPage;

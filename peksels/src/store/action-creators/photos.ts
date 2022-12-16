@@ -1,34 +1,33 @@
-import { createClient, PaginationParams } from "pexels";
+import { createClient } from "pexels";
 import { Dispatch } from "redux";
 import { PhotosActionsTypes } from "../../entities/enums/fetch";
-import { PhotosAction } from "../../entities/types/photos";
+import { PAGES } from "../../entities/enums/pages";
+import { PagParams, PhotosAction } from "../../entities/types/photos";
 
 export const fetchPhotos = (
-  paginationParams: PaginationParams = { page: 1, per_page: 30 }
+  paginationParams: PagParams = { page: 1, per_page: 30, query: "" },
+  pageName?: string
 ) => {
   const client = createClient(`${process.env.REACT_APP_PEXELS_API_KEY}`);
 
   return async (dispatch: Dispatch<PhotosAction>) => {
     dispatch({ type: PhotosActionsTypes.FETCH_PHOTOS });
-    await client.photos
-      .curated(paginationParams)
-      .then((photos) => {
-        if ("photos" in photos) {
-          return photos.photos;
-        }
-        throw new Error(photos.error);
-      })
-      .then((photos) => {
+    try {
+      const response =
+        pageName === PAGES.MAIN
+          ? await client.photos.curated(paginationParams)
+          : await client.photos.search(paginationParams);
+      if ("photos" in response) {
         dispatch({
           type: PhotosActionsTypes.FETCH_PHOTOS_SUCCESS,
-          payload: { photos: photos, next_page: 1 },
+          payload: { photos: response.photos },
         });
-      })
-      .catch((e) => {
-        dispatch({
-          type: PhotosActionsTypes.FETCH_PHOTOS_ERROR,
-          payload: "Ошибка загрузки фото!",
-        });
+      } else throw new Error();
+    } catch (e) {
+      dispatch({
+        type: PhotosActionsTypes.FETCH_PHOTOS_ERROR,
+        payload: "Ошибка загрузки фото!",
       });
+    }
   };
 };

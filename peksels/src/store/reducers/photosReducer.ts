@@ -28,6 +28,8 @@ export const photosReducer = (
       };
     case PhotosActionsTypes.FETCH_PHOTOS_ERROR:
       return { ...state, loading: false, error: action.payload, photos: [] };
+    case PhotosActionsTypes.CLEAR_STORE:
+      return { ...state, loading: false, error: null, photos: [] };
     default:
       return state;
   }
