@@ -55,7 +55,7 @@ function ListOfPhotos({ pageName }: PageProps) {
 
   const query: string = category || "";
 
-  let filters: PhotosFilters = initialFilters;
+  const [filters, setFilters] = useState(initialFilters);
 
   const updateColumns = () => {
     const photoColumns = initialPhotoColumnsState;
@@ -81,22 +81,21 @@ function ListOfPhotos({ pageName }: PageProps) {
           photo.width >= photo.height
         )
           return false;
+
         if (
-          SizesFiltersOptions.LARGE &&
-          photo.height.toString() < PhotoSizes.LARGE &&
+          filters.sizes === SizesFiltersOptions.LARGE &&
           photo.width.toString() < PhotoSizes.LARGE
         )
           return false;
         else if (
-          SizesFiltersOptions.MEDIUM &&
-          photo.height.toString() < PhotoSizes.MEDIUM &&
-          photo.width.toString() < PhotoSizes.MEDIUM
+          (filters.sizes === SizesFiltersOptions.MEDIUM &&
+            photo.width.toString() > PhotoSizes.LARGE) ||
+          photo.width.toString() < PhotoSizes.SMALL
         )
           return false;
         else if (
-          SizesFiltersOptions.SMALL &&
-          photo.height.toString() < PhotoSizes.SMALL &&
-          photo.width.toString() < PhotoSizes.SMALL
+          filters.sizes === SizesFiltersOptions.SMALL &&
+          photo.width.toString() > PhotoSizes.SMALL
         )
           return false;
         return true;
@@ -139,8 +138,8 @@ function ListOfPhotos({ pageName }: PageProps) {
 
   const handleChange = (event: SelectChangeEvent) => {
     event.target.name === selectNames.orientations
-      ? (filters = { ...filters, orientations: event.target.value })
-      : (filters = { ...filters, sizes: event.target.value });
+      ? setFilters({ ...filters, orientations: event.target.value })
+      : setFilters({ ...filters, sizes: event.target.value });
     updateColumns();
   };
 
@@ -162,7 +161,6 @@ function ListOfPhotos({ pageName }: PageProps) {
   }, []);
 
   useEffect(() => {
-    if (category && !photos) fetchPhotos({ page, per_page, query }, pageName);
     return () => {
       clearStore();
     };
@@ -171,6 +169,10 @@ function ListOfPhotos({ pageName }: PageProps) {
   useEffect(() => {
     updateColumns();
   }, [photos]);
+
+  useEffect(() => {
+    if (photos) updateColumns();
+  }, [filters]);
 
   if (error) {
     return (

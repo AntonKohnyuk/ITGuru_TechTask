@@ -5,7 +5,7 @@ import { PAGES } from "../../entities/enums/pages";
 import { PagParams, PhotosAction } from "../../entities/types/photos";
 
 export const fetchPhotos = (
-  paginationParams: PagParams = { page: 1, per_page: 30, query: "" },
+  paginationParams: PagParams = { page: 1, per_page: 50, query: "" },
   pageName?: string
 ) => {
   const client = createClient(`${process.env.REACT_APP_PEXELS_API_KEY}`);
