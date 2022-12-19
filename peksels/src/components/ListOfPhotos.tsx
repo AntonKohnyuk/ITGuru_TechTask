@@ -267,7 +267,7 @@ function ListOfPhotos({ pageName }: PageProps) {
         </div>
       </div>
 
-      {loading && <h2>Идет загрузка...</h2>}
+      {loading && <h2 className="loading">Идет загрузка...</h2>}
     </div>
   );
 }
