@@ -8,6 +8,22 @@ export interface PhotosState {
   error: null | string;
 }
 
+export interface PhotoColumns {
+  firstColumn: Photo[];
+  firstColumnHeight: number;
+
+  secondColumn: Photo[];
+  secondColumnHeight: number;
+
+  thirdColumn: Photo[];
+  thirdColumnHeight: number;
+}
+
+export interface PhotosFilters {
+  orientations: string;
+  sizes: string;
+}
+
 interface FetchPhotosAction {
   type: PhotosActionsTypes.FETCH_PHOTOS;
 }
