@@ -8,6 +8,22 @@ export interface PhotosState {
   error: null | string;
 }
 
+export interface PhotoColumns {
+  firstColumn: Photo[];
+  firstColumnHeight: number;
+
+  secondColumn: Photo[];
+  secondColumnHeight: number;
+
+  thirdColumn: Photo[];
+  thirdColumnHeight: number;
+}
+
+export interface PhotosFilters {
+  orientations: string;
+  sizes: string;
+}
+
 interface FetchPhotosAction {
   type: PhotosActionsTypes.FETCH_PHOTOS;
 }
@@ -16,7 +32,6 @@ interface FetchPhotosSuccessAction {
   type: PhotosActionsTypes.FETCH_PHOTOS_SUCCESS;
   payload: {
     photos: Photo[];
-    next_page: number;
   };
 }
 
@@ -25,14 +40,25 @@ interface FetchPhotosErrorAction {
   payload: string;
 }
 
+interface ClearStorePhotos {
+  type: PhotosActionsTypes.CLEAR_STORE;
+}
+
+interface ClearStoreSettings {
+  type: SetSettingsActionsTypes.CLEAR_STORE;
+}
+
 export type PhotosAction =
   | FetchPhotosAction
   | FetchPhotosErrorAction
-  | FetchPhotosSuccessAction;
+  | FetchPhotosSuccessAction
+  | ClearStorePhotos;
 
-export interface SetFetchSettingsAction {
+interface SetFetchSettingsAction {
   type: SetSettingsActionsTypes.SET_SETTINGS;
   payload: PaginationParams;
 }
+
+export type SettingsAction = SetFetchSettingsAction | ClearStoreSettings;
 
 export type PagParams = PaginationParams & { query: string };
