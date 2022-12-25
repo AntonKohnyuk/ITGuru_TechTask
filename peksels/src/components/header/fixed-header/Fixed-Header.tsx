@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import SearchIcon from "@mui/icons-material/Search";
 import SvgIcon from "@mui/icons-material/Search";
 
-export default function Managment() {
+export default function FixedHeader() {
   const [inputVal, setInputVal] = useState("");
 
   const navigate = useNavigate();

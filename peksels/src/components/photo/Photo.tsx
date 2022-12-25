@@ -1,5 +1,5 @@
 import { Photo } from "pexels";
-import "../entities/styles/photo-card.scss";
+import "./Photo.scss";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import DownloadIcon from "@mui/icons-material/Download";
@@ -9,7 +9,8 @@ import {
   addLike,
   isLiked,
   removeLike,
-} from "../entities/localStorage/localStorage";
+} from "../../entities/localStorage/localStorage";
+import { saveAs } from "file-saver";
 
 interface PhotoProps {
   photo: Photo;
@@ -25,6 +26,10 @@ function PhotoCard({ photo }: PhotoProps) {
   const likePhoto = () => {
     setLiked(!liked);
     liked ? removeLike(photo.id) : addLike(photo.id);
+  };
+
+  const downloadImg = () => {
+    saveAs(photo.src.original, `${photo.alt || "img" + photo.id}.jpeg`);
   };
 
   return (
@@ -44,14 +49,7 @@ function PhotoCard({ photo }: PhotoProps) {
             height={24}
           />
         </button>
-        <a
-          download
-          href={photo.src.original}
-          title="download"
-          className="download-photo"
-          target="_blank"
-          rel="noreferrer noopenen"
-        >
+        <button onClick={downloadImg} className="download-photo">
           <SvgIcon
             component={DownloadIcon}
             className="download-icon"
@@ -59,7 +57,7 @@ function PhotoCard({ photo }: PhotoProps) {
             width={24}
             height={24}
           />
-        </a>
+        </button>
       </div>
       <div className="photographer">
         <a

@@ -1,11 +1,12 @@
 import { Photo } from "pexels";
 import { useEffect, useState } from "react";
-import "../entities/styles/header.scss";
-import { backgroundFetch } from "../entities/API/backgroundFetch";
+import "./Header.scss";
+import { backgroundFetch } from "../../entities/API/backgroundFetch";
 import SearchIcon from "@mui/icons-material/Search";
 import SvgIcon from "@mui/icons-material/Search";
-import { getCategories } from "../entities/data/query";
+import { getCategories } from "../../entities/data/query";
 import { Link, useNavigate } from "react-router-dom";
+import FixedHeader from "./fixed-header/Fixed-Header";
 
 function Header() {
   const [backImg, setBackImg] = useState({} as Photo);
@@ -124,43 +125,7 @@ function Header() {
           <p>All Photos provided by Pexels</p>
         </a>
       </header>
-      {hideHeader && (
-        <div className="fixed-header">
-          <img
-            src="/img/pexels-white.png"
-            alt="Pexels Logo"
-            className="logo-img"
-          />
-          <form action="" role="search" className="search-form">
-            <div className="search-container">
-              <input
-                type="search"
-                className="search-input"
-                placeholder="Search for free photos"
-                value={inputVal}
-                onChange={(event) => setInputVal(event.target.value)}
-                onKeyDown={(event) => {
-                  if (event.code === "13") {
-                    findPhotos(event);
-                  }
-                }}
-              />
-              <button
-                className="search-input-button"
-                onClick={(event) => findPhotos(event)}
-              >
-                <SvgIcon
-                  component={SearchIcon}
-                  className="search-icon"
-                  viewBox="0 0 24 24"
-                  width={24}
-                  height={24}
-                />
-              </button>
-            </div>
-          </form>
-        </div>
-      )}
+      {hideHeader && <FixedHeader />}
     </>
   );
 }

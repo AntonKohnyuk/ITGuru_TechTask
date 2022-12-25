@@ -1,5 +1,5 @@
-import Header from "../components/Header";
-import ListOfPhotos from "../components/ListOfPhotos";
+import Header from "../components/header/Header";
+import ListOfPhotos from "../components/list-of-photos/ListOfPhotos";
 import { PAGES } from "../entities/enums/pages";
 
 function MainPage() {

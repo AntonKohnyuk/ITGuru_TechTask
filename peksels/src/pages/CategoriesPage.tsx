@@ -1,11 +1,11 @@
-import ListOfPhotos from "../components/ListOfPhotos";
-import Managment from "../components/Managment";
+import ListOfPhotos from "../components/list-of-photos/ListOfPhotos";
+import FixedHeader from "../components/header/fixed-header/Fixed-Header";
 import { PAGES } from "../entities/enums/pages";
 
 function CategoriesPage() {
   return (
     <>
-      <Managment />
+      <FixedHeader />
       <ListOfPhotos pageName={PAGES.CATEGORIES} />
     </>
   );

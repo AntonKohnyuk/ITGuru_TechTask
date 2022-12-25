@@ -1,15 +1,15 @@
 import { useEffect, useState } from "react";
-import { useTypedSelector } from "../hooks/useTypedSelector";
-import PhotoCard from "./Photo";
-import "../entities/styles/list-of-photos.scss";
-import { useActions } from "../hooks/useActions";
+import { useTypedSelector } from "../../hooks/useTypedSelector";
+import PhotoCard from "../photo/Photo";
+import "./ListOfPhotos.scss";
+import { useActions } from "../../hooks/useActions";
 import { useParams } from "react-router-dom";
-import { PhotoColumns, PhotosFilters } from "../entities/types/photos";
+import { PhotoColumns, PhotosFilters } from "../../entities/types/photos";
 import {
   OrientationsFiltersOptions,
   PhotoSizes,
   SizesFiltersOptions,
-} from "../entities/enums/filters";
+} from "../../entities/enums/filters";
 import {
   FormControl,
   MenuItem,
