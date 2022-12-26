@@ -1,4 +1,3 @@
-import { PaginationParams } from "pexels";
 import { SetSettingsActionsTypes } from "../../entities/enums/settings";
 import { PagParams, SettingsAction } from "../../entities/types/photos";
 
@@ -11,7 +10,7 @@ const initialState: PagParams = {
 const fetchSettingsReducer = (
   state = initialState,
   action: SettingsAction
-): PaginationParams => {
+): PagParams => {
   switch (action.type) {
     case SetSettingsActionsTypes.SET_SETTINGS:
       return { ...state, ...action.payload };

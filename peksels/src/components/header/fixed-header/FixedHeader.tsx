@@ -2,15 +2,20 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import SearchIcon from "@mui/icons-material/Search";
 import SvgIcon from "@mui/icons-material/Search";
+import "./FixedHeader.scss";
+import { useActions } from "../../../hooks/useActions";
 
-export default function Managment() {
+export default function FixedHeader() {
   const [inputVal, setInputVal] = useState("");
+
+  const { clearStore } = useActions();
 
   const navigate = useNavigate();
 
   const findPhotos = (event: React.FormEvent) => {
     event.preventDefault();
     if (inputVal) {
+      clearStore();
       navigate(`/categories/${inputVal}`);
     }
   };
@@ -18,7 +23,7 @@ export default function Managment() {
   return (
     <div style={{ height: "90px", marginBottom: "30px" }}>
       <div className="fixed-header">
-        <Link to="/main" className="logo">
+        <Link to="/main" className="logo" onClick={clearStore}>
           <img
             src="/img/pexels-white.png"
             alt="Pexels Logo"
