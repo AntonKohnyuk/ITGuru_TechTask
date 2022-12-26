@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import SearchIcon from "@mui/icons-material/Search";
 import SvgIcon from "@mui/icons-material/Search";
+import "./FixedHeader.scss";
 
 export default function FixedHeader() {
   const [inputVal, setInputVal] = useState("");

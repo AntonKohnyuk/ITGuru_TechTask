@@ -43,9 +43,7 @@ const query: string[] = [
 ];
 
 export function getCategories() {
-  const categories: string[] = query.splice(
-    Math.floor(Math.random() * (33 - 0)) + 0,
-    7
-  );
+  const start = Math.floor(Math.random() * (34 - 0 + 1) + 0);
+  const categories: string[] = query.slice(start, start + 7);
   return categories;
 }

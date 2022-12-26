@@ -1,0 +1,63 @@
+@import "variables";
+@import "theme";
+
+@mixin common-icon {
+  width: $common-icon-width;
+  height: $common-icon-height;
+  min-width: $common-icon-width;
+  min-height: $common-icon-height;
+}
+
+@mixin common-button {
+  position: absolute;
+  background: $primary-color-second;
+  pointer-events: all;
+  border: $primary-color-first;
+  border-radius: $default-border-radius;
+  color: $primary-color-first;
+
+  width: $common-button-width;
+  height: $common-button-height;
+  cursor: pointer;
+
+  @include elements-in-centre;
+
+  &:hover {
+    opacity: $hover-opacity-littel;
+  }
+}
+
+@mixin elements-in-centre {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin search-input {
+  border: 0;
+  left: 0;
+  width: calc(100% - 57px);
+  padding: $default-offset $default-offset-one-quarter $default-offset 20px;
+  height: 100%;
+  color: #7f7f7f;
+  border-radius: 0;
+  border-top-left-radius: $default-border-radius;
+  border-bottom-left-radius: $default-border-radius;
+  -webkit-appearance: none;
+  position: absolute;
+  font-size: $default-font-size;
+}
+
+@mixin search-input-button {
+  position: absolute;
+  border: none;
+  right: 0;
+  @include elements-in-centre;
+  padding-right: $default-offset;
+  padding-left: $default-offset;
+  cursor: pointer;
+  border-top-right-radius: $default-offset-half;
+  border-bottom-right-radius: $default-offset-half;
+  height: 100%;
+  background-color: $primary-color-second;
+}

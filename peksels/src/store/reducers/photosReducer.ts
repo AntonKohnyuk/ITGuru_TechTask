@@ -27,7 +27,12 @@ export const photosReducer = (
         photos: [...state.photos, ...action.payload.photos],
       };
     case PhotosActionsTypes.FETCH_PHOTOS_ERROR:
-      return { ...state, loading: false, error: action.payload, photos: [] };
+      return {
+        ...state,
+        loading: false,
+        error: action.payload,
+        photos: [...state.photos],
+      };
     case PhotosActionsTypes.CLEAR_STORE:
       return { ...state, loading: false, error: null, photos: [] };
     default:

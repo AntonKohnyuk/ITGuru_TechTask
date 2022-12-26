@@ -11,6 +11,7 @@ import {
   SizesFiltersOptions,
 } from "../../entities/enums/filters";
 import {
+  CircularProgress,
   FormControl,
   MenuItem,
   Select,
@@ -132,6 +133,7 @@ function ListOfPhotos({ pageName }: PageProps) {
         loading
       )
         break;
+
       return setFetchSettings({ page: page! + 1, per_page });
     }
   };
@@ -144,43 +146,28 @@ function ListOfPhotos({ pageName }: PageProps) {
   };
 
   useEffect(() => {
-    window.addEventListener("scroll", InfiniteScroll);
-    return () => {
-      window.removeEventListener("scroll", InfiniteScroll);
-    };
-  });
-
-  useEffect(() => {
     fetchPhotos({ page, per_page, query }, pageName);
-  }, [page]);
 
-  useEffect(() => {
-    return () => {
-      clearStore();
-    };
-  }, []);
-
-  useEffect(() => {
     return () => {
       clearStore();
     };
   }, [category]);
 
   useEffect(() => {
+    if (page! > 1) fetchPhotos({ page, per_page, query }, pageName);
+  }, [page]);
+
+  useEffect(() => {
     updateColumns();
+    window.addEventListener("scroll", InfiniteScroll);
+    return () => {
+      window.removeEventListener("scroll", InfiniteScroll);
+    };
   }, [photos]);
 
   useEffect(() => {
-    if (photos) updateColumns();
+    updateColumns();
   }, [filters]);
-
-  if (error) {
-    return (
-      <div className="error">
-        <h2>{error}</h2>
-      </div>
-    );
-  }
 
   return (
     <div className="main-content">
@@ -202,13 +189,14 @@ function ListOfPhotos({ pageName }: PageProps) {
           </div>
           {showFilters && (
             <div className="filters-options">
-              <FormControl sx={{ m: 1, minWidth: 240 }}>
+              <FormControl sx={{ m: 1, minWidth: 200 }}>
                 <Select
                   value={filters.orientations}
                   onChange={handleChange}
                   displayEmpty
                   inputProps={{ "aria-label": "Without label" }}
                   name={selectNames.orientations}
+                  className="select"
                 >
                   <MenuItem value={OrientationsFiltersOptions.ALL_ORIENTATIONS}>
                     {OrientationsFiltersOptions.ALL_ORIENTATIONS}
@@ -225,13 +213,14 @@ function ListOfPhotos({ pageName }: PageProps) {
                 </Select>
               </FormControl>
 
-              <FormControl sx={{ m: 1, minWidth: 240 }}>
+              <FormControl sx={{ m: 1, minWidth: 200 }}>
                 <Select
                   value={filters.sizes}
                   onChange={handleChange}
                   displayEmpty
                   inputProps={{ "aria-label": "Without label" }}
                   name={selectNames.sizes}
+                  className="select"
                 >
                   <MenuItem value={SizesFiltersOptions.ALL_SIZES}>
                     {SizesFiltersOptions.ALL_SIZES}
@@ -251,6 +240,7 @@ function ListOfPhotos({ pageName }: PageProps) {
           )}
         </div>
       )}
+
       <div className="photos">
         <div className="content-flex">
           {photoColumns.firstColumn.map((photo) => (
@@ -269,7 +259,29 @@ function ListOfPhotos({ pageName }: PageProps) {
         </div>
       </div>
 
-      {loading && <h2 className="loading">Идет загрузка...</h2>}
+      {!photos.length && !loading && !error && (
+        <h2
+          style={{
+            display: "flex",
+            alignItems: "centre",
+            justifyContent: "center",
+            fontSize: "2rem",
+          }}
+        >
+          There are no photos for this request!
+        </h2>
+      )}
+      {loading && (
+        <div className="loading">
+          <CircularProgress color="inherit" style={{ scale: "4" }} />
+        </div>
+      )}
+
+      {error && (
+        <div className="error">
+          <h2>{error}</h2>
+        </div>
+      )}
     </div>
   );
 }

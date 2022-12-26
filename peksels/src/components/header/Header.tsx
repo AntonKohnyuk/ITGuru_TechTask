@@ -6,7 +6,8 @@ import SearchIcon from "@mui/icons-material/Search";
 import SvgIcon from "@mui/icons-material/Search";
 import { getCategories } from "../../entities/data/query";
 import { Link, useNavigate } from "react-router-dom";
-import FixedHeader from "./fixed-header/Fixed-Header";
+import FixedHeader from "./fixed-header/FixedHeader";
+import { CircularProgress } from "@mui/material";
 
 function Header() {
   const [backImg, setBackImg] = useState({} as Photo);
@@ -111,10 +112,17 @@ function Header() {
           target="_blank"
           rel="noreferrer"
         >
-          <p>
-            <span style={{ opacity: 0.5 }}>Photo by&nbsp;— </span>
-            <span>{backImg.photographer || "loading"}</span>
-          </p>
+          <div
+            className="photographer-name"
+            style={{
+              display: "flex",
+              alignItems: "baseline",
+            }}
+          >
+            <p style={{ opacity: 0.5 }}>Photo by&nbsp;—&nbsp;</p>
+
+            {backImg.photographer || <CircularProgress color="inherit" />}
+          </div>
         </a>
         <a
           href="https://www.pexels.com"

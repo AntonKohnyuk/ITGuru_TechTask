@@ -1,17 +1,30 @@
 $default-offset: 1rem;
 $default-offset-double: $default-offset * 2;
+$default-offset-triple: $default-offset * 3;
 $default-offset-quad: $default-offset * 4;
 $default-offset-half: $default-offset / 2;
 $default-offset-one-quarter: $default-offset / 4;
 $default-font-size: 1rem;
-$default-font-size-header: $default-font-size * 3;
-$default-font-size-big: $default-font-size * 1.2;
+$default-font-size-huge: $default-font-size * 3;
+$default-font-size-big: $default-font-size * 2;
 $default-font-size-small: $default-font-size * 0.9;
 $width-of-child: 80%;
 $height-of-header: 4rem;
 $width-half: 50%;
 $width-third: 33%;
-$max-input-width: 720px;
+$max-input-width: 630px;
+$default-border-radius: 10px;
 
 $logo-width: 120px;
 $logo-height: 42px;
+
+$common-icon-height: 25px;
+$common-icon-width: 25px;
+
+$hover-opacity-littel: 0.9;
+$hover-opacity-strongly: 0.7;
+
+$common-button-height: 40px;
+$common-button-width: 40px;
+
+$min-header-height: 500px;

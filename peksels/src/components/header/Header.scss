@@ -1,14 +1,17 @@
+@import "src/entities/styles/mixins";
+@import "src/entities/styles/variables";
+@import "src/entities/styles/theme";
+
 .header-wrapper {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 500px;
+  @include elements-in-centre;
+
+  min-height: $min-header-height;
   width: 100%;
   position: relative;
   z-index: 9;
-  padding: 80px 0;
-  margin-bottom: 50px;
-  color: white;
+  padding: $default-offset-quad 0;
+  margin-bottom: $default-offset-triple;
+  color: $primary-color-second;
 
   .logo {
     position: absolute;
@@ -18,17 +21,17 @@
 
   .header-content {
     width: 100%;
-    max-width: 630px;
+    max-width: $max-input-width;
 
     .trending {
       font-size: 1rem;
-      margin-top: 30px;
+      margin-top: $default-offset-double;
       .trending-search {
         color: hsla(0, 0%, 100%, 0.7);
       }
       .category {
         text-decoration: none;
-        color: white;
+        color: $primary-color-second;
       }
     }
   }
@@ -50,9 +53,14 @@
     right: 20px;
     bottom: 20px;
     transition: opacity 0.2s ease;
-    opacity: 0.7;
+    opacity: $hover-opacity-strongly;
     text-decoration: none;
-    color: white;
+    color: $primary-color-second;
+
+    .photographer-name {
+      @include elements-in-centre;
+      flex-direction: row;
+    }
 
     &:hover {
       opacity: 1;
@@ -64,24 +72,13 @@
     bottom: 15px;
     left: 15px;
     text-decoration: none;
-    color: white;
-    opacity: 0.7;
+    color: $primary-color-second;
+    opacity: $hover-opacity-strongly;
 
     &:hover {
       opacity: 1;
     }
   }
-}
-
-.fixed-header {
-  position: fixed;
-  background-color: black;
-  width: 100%;
-  top: 0;
-  left: 0;
-  z-index: 10;
-  padding: 20px 30px;
-  display: flex;
 }
 
 .search-form {
@@ -94,40 +91,13 @@
     height: 50px;
 
     .search-input {
-      border: 0;
-      left: 0;
-      width: calc(100% - 55px);
-      padding: 15px 4px 15px 20px;
-      height: 100%;
-      color: #7f7f7f;
-      border-radius: 0;
-      border-top-left-radius: 8px;
-      border-bottom-left-radius: 8px;
-      -webkit-appearance: none;
-      position: absolute;
-      font-size: 18px;
+      @include search-input;
     }
 
     .search-input-button {
-      position: absolute;
-      border: none;
-      right: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding-right: 15px;
-      padding-left: 15px;
-      cursor: pointer;
-      border-top-right-radius: 8px;
-      border-bottom-right-radius: 8px;
-      height: 100%;
-      background-color: white;
-
+      @include search-input-button;
       .search-icon {
-        width: 25px;
-        min-width: 25px;
-        height: 25px;
-        min-height: 25px;
+        @include common-icon;
         transition: fill 0.15s ease;
       }
     }
@@ -135,7 +105,7 @@
 }
 
 .logo-img {
-  width: 120px;
-  height: 42px;
-  margin-right: 20px;
+  width: $logo-width;
+  height: $logo-height;
+  margin-right: $default-offset;
 }

@@ -33,11 +33,15 @@ function PhotoCard({ photo }: PhotoProps) {
   };
 
   return (
-    <div className="card-wrapper">
+    <div
+      className="card-wrapper"
+      style={{ backgroundColor: `${photo.avg_color}` }}
+    >
       <img
         src={photo.src.large}
         alt={photo.alt || "Photo"}
         className="photo-img"
+        style={{ backgroundColor: `${photo.avg_color}` }}
       />
       <div className="group-of-buttons">
         <button className="like-button" onClick={likePhoto}>
