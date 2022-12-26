@@ -8,12 +8,15 @@ import { getCategories } from "../../entities/data/query";
 import { Link, useNavigate } from "react-router-dom";
 import FixedHeader from "./fixed-header/FixedHeader";
 import { CircularProgress } from "@mui/material";
+import { useActions } from "../../hooks/useActions";
 
 function Header() {
   const [backImg, setBackImg] = useState({} as Photo);
   const [inputVal, setInputVal] = useState("");
   const [categories, setCategories] = useState([] as string[]);
   const [hideHeader, setHideHeader] = useState(false);
+
+  const { clearStore } = useActions();
 
   const navigate = useNavigate();
 
@@ -36,6 +39,7 @@ function Header() {
   const findPhotos = (event: React.FormEvent) => {
     event.preventDefault();
     if (inputVal) {
+      clearStore();
       navigate(`/categories/${inputVal}`);
     }
   };
@@ -94,6 +98,7 @@ function Header() {
                 to={`/categories/${category}`}
                 key={index}
                 className="category"
+                onClick={clearStore}
               >
                 {category}
                 {index < 6 ? <span>,&nbsp;</span> : <span>&nbsp;</span>}

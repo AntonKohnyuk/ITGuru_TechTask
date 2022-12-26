@@ -145,12 +145,12 @@ function ListOfPhotos({ pageName }: PageProps) {
     updateColumns();
   };
 
+  window.onpopstate = () => {
+    clearStore();
+  };
+
   useEffect(() => {
     fetchPhotos({ page, per_page, query }, pageName);
-
-    return () => {
-      clearStore();
-    };
   }, [category]);
 
   useEffect(() => {
